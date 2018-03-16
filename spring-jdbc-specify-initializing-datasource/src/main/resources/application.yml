@@ -1,0 +1,19 @@
+datasource:
+  primary:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:primary
+    username: sa
+    password:
+    schema: primary-schema.sql
+    data: primary-data.sql
+  secondary:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:secondary
+    username: sa
+    password:
+    schema: secondary-schema.sql
+    data: secondary-data.sql
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
