@@ -22,6 +22,13 @@ public class DataSourceInitializerConfig {
 
     @Bean
     @Primary
+    public DataSourceInitializer dataSourceInitializer(
+            final DataSource dataSource,
+            final DataSourceProperties properties) {
+        return createDataSourceInitializer(dataSource, properties);
+    }
+
+    @Bean
     public DataSourceInitializer primaryDataSourceInitializer(
             @Qualifier("primaryDataSource") final DataSource dataSource,
             @Qualifier("primaryDataSourceProperties") final DataSourceProperties properties) {

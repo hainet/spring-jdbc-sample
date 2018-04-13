@@ -13,6 +13,11 @@ public class JdbcTemplateConfig {
 
     @Bean
     @Primary
+    public JdbcTemplate jdbcTemplate(final DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean
     public JdbcTemplate primaryJdbcTemplate(
             @Qualifier("primaryDataSource") final DataSource dataSource) {
         return new JdbcTemplate(dataSource);

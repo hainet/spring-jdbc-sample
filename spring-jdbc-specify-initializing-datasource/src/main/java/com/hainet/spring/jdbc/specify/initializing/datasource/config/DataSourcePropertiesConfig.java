@@ -11,6 +11,12 @@ public class DataSourcePropertiesConfig {
 
     @Bean
     @Primary
+    @ConfigurationProperties("datasource.default")
+    public DataSourceProperties dataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean
     @ConfigurationProperties("datasource.primary")
     public DataSourceProperties primaryDataSourceProperties() {
         return new DataSourceProperties();

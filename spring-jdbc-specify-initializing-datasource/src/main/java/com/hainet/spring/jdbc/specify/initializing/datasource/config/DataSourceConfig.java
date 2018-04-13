@@ -13,6 +13,12 @@ public class DataSourceConfig {
 
     @Bean
     @Primary
+    public DataSource dataSource(
+            @Qualifier("dataSourceProperties") final DataSourceProperties properties) {
+        return properties.initializeDataSourceBuilder().build();
+    }
+
+    @Bean
     public DataSource primaryDataSource(
             @Qualifier("primaryDataSourceProperties") final DataSourceProperties properties) {
         return properties.initializeDataSourceBuilder().build();
