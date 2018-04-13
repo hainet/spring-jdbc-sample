@@ -1,6 +1,5 @@
 package com.hainet.spring.jdbc.specify.initializing.datasource;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -27,11 +29,16 @@ public class MultipleSchemaTest {
 
     @Test
     public void primaryToPrimaryTest() {
+        // Setup
+        final Map<String, Object> expected = new HashMap<>();
+        expected.put("ID", 1);
+        expected.put("NAME", "primary");
+
         // Exercise
-        final String actual = primary.queryForMap("SELECT * FROM `primary`").get("name").toString();
+        final Map<String, Object> actual = primary.queryForMap("SELECT * FROM `primary`");
 
         // Verify
-        assertThat(actual, is(CoreMatchers.containsString("primary")));
+        assertThat(actual, is(expected));
     }
 
     @Test(expected = BadSqlGrammarException.class)
@@ -42,11 +49,16 @@ public class MultipleSchemaTest {
 
     @Test
     public void secondaryToSecondaryTest() {
+        // Setup
+        final Map<String, Object> expected = new HashMap<>();
+        expected.put("ID", 1);
+        expected.put("NAME", "secondary");
+
         // Exercise
-        final String actual = secondary.queryForMap("SELECT * FROM `secondary`").get("name").toString();
+        final Map<String, Object> actual = secondary.queryForMap("SELECT * FROM `secondary`");
 
         // Verify
-        assertThat(actual, is(CoreMatchers.containsString("secondary")));
+        assertThat(actual, is(expected));
     }
 
     @Test(expected = BadSqlGrammarException.class)
