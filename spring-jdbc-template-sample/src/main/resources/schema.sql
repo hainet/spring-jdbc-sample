@@ -1,0 +1,5 @@
+CREATE TABLE person (
+  id INT AUTO_INCREMENT,
+  name VARCHAR(10) NOT NULL UNIQUE,
+  PRIMARY KEY (id)
+);
