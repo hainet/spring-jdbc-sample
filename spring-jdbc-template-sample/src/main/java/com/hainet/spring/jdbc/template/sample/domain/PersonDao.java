@@ -4,6 +4,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class PersonDao {
 
@@ -18,6 +20,13 @@ public class PersonDao {
                 "SELECT * FROM person WHERE id = ?",
                 new BeanPropertyRowMapper<>(Person.class),
                 id
+        );
+    }
+
+    public List<Person> findAll() {
+        return this.jdbc.query(
+                "SELECT * FROM person ORDER BY id",
+                new BeanPropertyRowMapper<>(Person.class)
         );
     }
 }

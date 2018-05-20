@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -25,5 +27,22 @@ public class PersonDaoTest {
 
         // Exercise and Verify
         assertThat(this.dao.findById(1), is(person));
+    }
+
+    @Test
+    public void findAllTest(){
+        // Setup
+        final Person hainet = new Person();
+        hainet.setId(1);
+        hainet.setName("hainet");
+        final Person spring = new Person();
+        spring.setId(2);
+        spring.setName("spring");
+        final Person jdbc = new Person();
+        jdbc.setId(3);
+        jdbc.setName("jdbc");
+
+        // Exercise and Verify
+        assertThat(this.dao.findAll(), is(Arrays.asList(hainet, spring, jdbc)));
     }
 }
