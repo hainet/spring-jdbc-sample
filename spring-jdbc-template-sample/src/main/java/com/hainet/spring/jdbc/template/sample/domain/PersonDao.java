@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PersonDao {
@@ -21,6 +22,10 @@ public class PersonDao {
                 new BeanPropertyRowMapper<>(Person.class),
                 id
         );
+    }
+
+    public Map<String, Object> findForMapById(final int id) {
+        return this.jdbc.queryForMap("SELECT * FROM person WHERE id = ?", id);
     }
 
     public List<Person> findAll() {

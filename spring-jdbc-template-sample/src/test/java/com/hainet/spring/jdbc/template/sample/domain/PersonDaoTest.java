@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -30,7 +32,18 @@ public class PersonDaoTest {
     }
 
     @Test
-    public void findAllTest(){
+    public void findForMapByIdTest() {
+        // Setup
+        final Map<String, Object> map = new HashMap<>();
+        map.put("ID", 1);
+        map.put("NAME", "hainet");
+
+        // Exercise and Verify
+        assertThat(this.dao.findForMapById(1), is(map));
+    }
+
+    @Test
+    public void findAllTest() {
         // Setup
         final Person hainet = new Person();
         hainet.setId(1);
