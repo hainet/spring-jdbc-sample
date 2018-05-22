@@ -58,4 +58,21 @@ public class PersonDaoTest {
         // Exercise and Verify
         assertThat(this.dao.findAll(), is(Arrays.asList(hainet, spring, jdbc)));
     }
+
+    @Test
+    public void findDorListTest() {
+        // Setup
+        final Map<String, Object> hainet = new HashMap<>();
+        hainet.put("ID", 1);
+        hainet.put("NAME", "hainet");
+        final Map<String, Object> spring = new HashMap<>();
+        spring.put("ID", 2);
+        spring.put("NAME", "spring");
+        final Map<String, Object> jdbc = new HashMap<>();
+        jdbc.put("ID", 3);
+        jdbc.put("NAME", "jdbc");
+
+        // Exercise and Verify
+        assertThat(this.dao.findForList(), is(Arrays.asList(hainet, spring, jdbc)));
+    }
 }

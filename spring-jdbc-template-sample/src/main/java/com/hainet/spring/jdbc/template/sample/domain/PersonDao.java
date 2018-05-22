@@ -34,4 +34,8 @@ public class PersonDao {
                 new BeanPropertyRowMapper<>(Person.class)
         );
     }
+
+    public List<Map<String, Object>> findForList() {
+        return this.jdbc.queryForList("SELECT * FROM person");
+    }
 }
