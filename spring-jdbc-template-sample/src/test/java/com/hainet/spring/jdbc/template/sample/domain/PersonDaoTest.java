@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class PersonDaoTest {
 
     @Autowired
@@ -74,5 +76,19 @@ public class PersonDaoTest {
 
         // Exercise and Verify
         assertThat(this.dao.findForList(), is(Arrays.asList(hainet, spring, jdbc)));
+    }
+
+    @Test
+    public void insertTest() {
+        // Setup
+        final Person person = new Person();
+        person.setId(4);
+        person.setName("java");
+
+        // Exercise
+        this.dao.insert(person);
+
+        // Verify
+        assertThat(this.dao.findById(4), is(person));
     }
 }

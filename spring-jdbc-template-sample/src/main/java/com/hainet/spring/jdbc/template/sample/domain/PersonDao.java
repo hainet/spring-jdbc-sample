@@ -38,4 +38,8 @@ public class PersonDao {
     public List<Map<String, Object>> findForList() {
         return this.jdbc.queryForList("SELECT * FROM person");
     }
+
+    public int insert(final Person person) {
+        return this.jdbc.update("INSERT INTO person (id, name) VALUES (4, 'java')");
+    }
 }
